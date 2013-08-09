@@ -1,9 +1,9 @@
-# -*- coding: utf-8 -*-
+# -*- coding: gbk -*-
 
 import csv
 import codecs
 
-# ·Ö×é±êÇ©×Ö¶ÎµÄÃû³Æ
+# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç©ï¿½Ö¶Îµï¿½ï¿½ï¿½ï¿½ï¿½
 GROUP_FIELD = u'Group Membership'
 
 def read(path):
@@ -15,25 +15,25 @@ def read(path):
 	for line in content.split('\n'):
 		words = line.split(",")
 		if len(keys) <= 0:
-			# ÌáÈ¡×Ö¶ÎÃû
+			# ï¿½ï¿½È¡ï¿½Ö¶ï¿½ï¿½ï¿½
 			keys = words
 			for i,key in enumerate(keys):
 				if key.find(GROUP_FIELD) >= 0:
 					key_group = i
 					break
-			assert key_group >= 0, "ÎÞ·¨ÕÒµ½·Ö×é±êÇ©×Ö¶Î:" + GROUP_FIELD
+			assert key_group >= 0, "ï¿½Þ·ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç©ï¿½Ö¶ï¿½:" + GROUP_FIELD
 		elif len(words) == len(keys):
-			# Ä¬ÈÏÇå¿ÕÏÖÓÐ±êÇ©
+			# Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Ç©
 			words[key_group] = []
 			data.append(words)
 
-	# Ìí¼Ó±êÇ©
+	# ï¿½ï¿½ï¿½Ó±ï¿½Ç©
 	filter(keys, data, u"Phone", key_group, u"Phone")
 	filter(keys, data, u"mail", key_group, u"Email")
 	filter(keys, data, u"mail", key_group, u"Gmail", u"@gmail")
 	filter(keys, data, u"Address", key_group, u"Address")
 
-	# ×ª»»±êÇ©¸ñÊ½
+	# ×ªï¿½ï¿½ï¿½ï¿½Ç©ï¿½ï¿½Ê½
 	tags = set()
 	for dat in data:
 		dat[key_group] = u" ::: ".join(dat[key_group])
@@ -43,7 +43,7 @@ def read(path):
 	return keys, data
 
 def filter(keys, data, filter_str, key_group, group_tag, sub_filter=None):
-	''' Æ¥Åäfilter_strµÄ×Ö¶Î£¬Èç¹ûÆäÓÐÄÚÈÝÔò¼ÓÉÏ·Ö×é±ê¼Çgroup_tag'''
+	''' Æ¥ï¿½ï¿½filter_strï¿½ï¿½ï¿½Ö¶Î£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½group_tag'''
 	keys_filter = [i for i, key in enumerate(keys) if key.find(filter_str) >=0]
 	for dat in data:
 		finded = False
